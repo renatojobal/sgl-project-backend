@@ -21,6 +21,15 @@
   },
   "homepage": "https://github.com/Rennato99/sgl-project-backend#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "date-and-time": "^0.8.1",
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.4",
+    "mongoose-unique-validator": "^2.0.3",
     "node-modules": "^1.0.1"
   }
 }
