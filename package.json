@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Primera version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rennato99/sgl-project-backend.git"
+  },
+  "keywords": [
+    "backend",
+    "nodejs"
+  ],
+  "author": "Renato",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Rennato99/sgl-project-backend/issues"
+  },
+  "homepage": "https://github.com/Rennato99/sgl-project-backend#readme",
+  "dependencies": {
+    "node-modules": "^1.0.1"
+  }
+}
