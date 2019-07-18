@@ -16,7 +16,7 @@ app.post('/login', (req, res) => {
             });
         }
         if (!result) {
-            res.status.json(400).json({
+            res.status(400).json({
                 ok: true,
                 result
             })

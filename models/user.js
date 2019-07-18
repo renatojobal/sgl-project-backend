@@ -4,34 +4,39 @@ const uniqueValidator = require('mongoose-unique-validator');
 let Schema = mongoose.Schema;
 
 let userschema = new Schema({
-    name: {
+    firstName: {
         type: String,
         required: [true, "El nombre es Requerido"]
     },
-    lastName: {
+    secondName: {
         type: String,
-        required: [true, "The lastname its required!"]
+        required: [true, "El segundo nombre es requerido!"]
+    },
+    firstSurname: {
+        type: String,
+        required: [true, "The firstSurname its required!"]
+    },
+    secondSurnme: {
+        type: String,
+        required: [true, "The secondSruname its required!"]
 
     },
     email: {
         type: String,
         required: [true, "The email its required!"]
     },
-    userName: {
+    username: {
         type: String,
-        required: [true, "The userName its required!"]
+        required: [true, "The username its required!"]
     },
     password: {
         type: String,
         required: [true, "The password its required!"]
     },
-    age: {
-        type: Number
-    },
-    rol: {
+    roll: {
         type: Schema.Types.ObjectId,
-        ref: 'Rol',
-        required: [true, "The rol its required!"]
+        ref: 'Roll',
+        required: [true, "The roll its required!"]
     },
     state: {
         type: Boolean,

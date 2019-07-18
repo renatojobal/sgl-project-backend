@@ -8,7 +8,7 @@ let rollSchema = new Schema({
     },
     description: {
         type: String,
-        required: [true, "The name its required!"]
+        required: [true, "The description its required!"]
     },
     state: {
         type: Boolean,
