@@ -24,12 +24,10 @@ app.post('/rol', (req, res) => {
 
     let rolToSave = new Rol({
         name: body.name,
-        description: body.description
     });
 
     rolToSave.save((err, rolDB) => {
         if (err) {
-            console.log('Error');
             return res.status(500).json({
                 ok: false,
                 err
@@ -43,7 +41,7 @@ app.post('/rol', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            rolDB
+            rolDB,
         });
     });
 })
