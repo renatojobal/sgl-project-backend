@@ -29,6 +29,7 @@ app.post('/rol', (req, res) => {
 
     rolToSave.save((err, rolDB) => {
         if (err) {
+            console.log('Error');
             return res.status(500).json({
                 ok: false,
                 err
