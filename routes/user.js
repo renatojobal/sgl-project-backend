@@ -20,19 +20,20 @@ app.get("/user", [verify_token], (req, res) => {
                 userDB
             });
         }
-    ).populate("Roll");
+    ).populate("Rol");
 });
 
 app.post("/user", (req, res) => {
     let body = req.body;
     let userToSave = new User({
-        name: body.name,
-        lastName: body.lastName,
+        firstName: body.firstName,
+        secondName: body.secondName,
+        firstSurname: body.firstSurname,
+        secondSurname: body.secondSurname,
         email: body.email,
-        userName: body.userName,
+        username: body.username,
         password: bcrypt.hashSync(body.password, 10),
-        age: body.age,
-        roll: body.roll
+        rol: body.rol
     });
 
     userToSave.save((err, userDB) => {
@@ -61,13 +62,14 @@ app.put("/user/:id", verify_token, (req, res) => {
     let body = req.body;
 
     let userToEdit = {
-        name: body.name,
-        lastName: body.lastName,
+        firstName: body.firstName,
+        secondName: body.secondName,
+        firstSurname: body.firstSurname,
+        secondSurname: body.secondSurname,
         email: body.email,
-        userName: body.userName,
+        username: body.username,
         password: body.password,
-        age: body.age,
-        roll: body.roll
+        rol: body.rol
     };
 
     User.findByIdAndUpdate(

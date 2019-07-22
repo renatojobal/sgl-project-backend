@@ -16,7 +16,7 @@ let userschema = new Schema({
         type: String,
         required: [true, "The firstSurname its required!"]
     },
-    secondSurnme: {
+    secondSurname: {
         type: String,
         required: [true, "The secondSruname its required!"]
 
@@ -33,10 +33,10 @@ let userschema = new Schema({
         type: String,
         required: [true, "The password its required!"]
     },
-    roll: {
+    rol: {
         type: Schema.Types.ObjectId,
-        ref: 'Roll',
-        required: [true, "The roll its required!"]
+        ref: 'Rol',
+        required: [true, "The rol its required!"]
     },
     state: {
         type: Boolean,

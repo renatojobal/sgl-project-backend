@@ -5,9 +5,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 app.post('/login', (req, res) => {
-    body = req.body
+    body = req.body;
+    
+
     Usuario.findOne({
-        userName: body.userName
+        email: body.email
     }, (err, result) => {
         if (err) {
             res.status(500).json({
@@ -21,7 +23,6 @@ app.post('/login', (req, res) => {
                 result
             })
         }
-
         const match = bcrypt.compareSync(body.password, result.password)
         if (match) {
             let token = jwt.sign({
@@ -35,7 +36,7 @@ app.post('/login', (req, res) => {
                 usuario: result,
                 token
             })
-
+            console.log("Credenciales correctas. Devolvemos el token");
         }
 
 

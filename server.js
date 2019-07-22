@@ -26,6 +26,6 @@ mongoose.connect('mongodb://localhost:27017/sga3', {
 
 // Port
 app.listen(process.env.PORT, () => {
-    // console.log("NODEJS LISTENING ", process.env.PORT);
+    console.log("NODEJS LISTENING ", process.env.PORT);
     console.log("NodeJS is working");
 });

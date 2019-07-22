@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
-const Roll = require('../models/roll');
+const Rol = require('../models/rol');
 
-app.get('/roll', (req, res) => {
-    Roll.find({
+app.get('/rol', (req, res) => {
+    Rol.find({
         state: true
-    }).exec((err, rollDB) => {
+    }).exec((err, rolDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -14,97 +14,96 @@ app.get('/roll', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            rollDB
+            rolDB
         })
     });
 });
 
-app.post('/roll', (req, res) => {
+app.post('/rol', (req, res) => {
     let body = req.body
 
-    let rollToSave = new Roll({
+    let rolToSave = new Rol({
         name: body.name,
         description: body.description
     });
 
-    rollToSave.save((err, rollDB) => {
+    rolToSave.save((err, rolDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         }
-        if (!rollDB) {
+        if (!rolDB) {
             return res.status(400).json({
                 ok: false,
-                rollDB
+                rolDB
             });
         }
         res.status(200).json({
             ok: true,
-            rollDB
+            rolDB
         });
     });
 })
 
 
-app.put('/roll/:id', (req, res) => {
+app.put('/rol/:id', (req, res) => {
     let id = req.params.id
     let body = req.body;
 
-    let rollToEdit = {
-        name: body.name,
-        description: body.description
+    let rolToEdit = {
+        name: body.name
     }
 
-    Roll.findByIdAndUpdate(id, rollToEdit, {
+    Rol.findByIdAndUpdate(id, rolToEdit, {
         new: true,
         runValidators: true
-    }, (err, rollDB) => {
+    }, (err, rolDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         }
-        if (!rollDB) {
+        if (!rolDB) {
             return res.status(400).json({
                 ok: false,
-                rollDB
+                rolDB
             });
         }
         res.status(200).json({
             ok: true,
-            rollDB
+            rolDB
         })
 
     });
 });
 
-app.delete('/roll/:id', (req, res) => {
+app.delete('/rol/:id', (req, res) => {
     let id = req.params.id
-    let rollState = {
+    let rolState = {
         state: false
     }
 
-    Roll.findByIdAndUpdate(id, rollState, {
+    Rol.findByIdAndUpdate(id, rolState, {
         new: true,
         runValidators: true
-    }, (err, rollDB) => {
+    }, (err, rolDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             })
         }
-        if (!rollDB) {
+        if (!rolDB) {
             ok: false,
-            rollDB
+            rolDB
         }
 
         res.status(200).json({
             ok: true,
-            rollDB
+            rolDB
         })
     })
 

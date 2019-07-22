@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let rollSchema = new Schema({
+let rolSchema = new Schema({
     name: {
         type: String,
         required: [true, "The name its required!"]
-    },
-    description: {
-        type: String,
-        required: [true, "The description its required!"]
     },
     state: {
         type: Boolean,
@@ -17,4 +13,4 @@ let rollSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Roll', rollSchema);
+module.exports = mongoose.model('Rol', rolSchema);

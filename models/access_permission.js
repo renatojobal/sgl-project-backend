@@ -21,10 +21,6 @@ let PermissionSchema = new Schema({
     typeAccess: {
         type: String,
         enum: typeAccess
-    },
-    state: {
-        type: Boolean,
-        default: true
     }
 });
 
