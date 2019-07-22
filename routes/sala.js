@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
-const Room = require('../models/room');
+const Sala = require('../models/sala');
 
 
-app.get('/room', (req, res) => {
-    Room.find({
+app.get('/sala', (req, res) => {
+    Sala.find({
         state: true
-    }, (err, rooms) => {
+    }, (err, salas) => {
         if (err) {
             return res.status.json({
                 ok: true,
@@ -15,22 +15,22 @@ app.get('/room', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            rooms
+            salas
         });
     })
 });
 
 
-app.get('/room/:id', (req, res) => {
+app.get('/sala/:id', (req, res) => {
     id = req.params.id;
-    Room.findById(id, (err, roomDB) => {
+    Sala.findById(id, (err, salaDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         };
-        if (!roomDB) {
+        if (!salaDB) {
             return res.status(500).json({
                 ok: false,
                 err: "Wrong id"
@@ -38,20 +38,20 @@ app.get('/room/:id', (req, res) => {
         };
         res.json({
             ok: true,
-            roomDB
+            salaDB
         });
     });
 
 });
 
-app.post("/room", (req, res) => {
+app.post("/sala", (req, res) => {
     let body = req.body;
-    let roomToSave = new Room({
+    let salaToSave = new Sala({
         name: body.name,
         description: body.description
     });
 
-    roomToSave.save((err, roomDB) => {
+    salaToSave.save((err, salaDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -59,7 +59,7 @@ app.post("/room", (req, res) => {
             });
 
         }
-        if (!roomDB) {
+        if (!salaDB) {
             return res.status(400).json({
                 ok: false,
                 error: err
@@ -67,70 +67,70 @@ app.post("/room", (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            data: roomDB
+            data: salaDB
         })
     });
 });
 
 
-app.put('/room/:id', (req, res) => {
+app.put('/sala/:id', (req, res) => {
     let id = req.params.id
 
     let body = req.body;
 
-    let roomToEdit = {
+    let salaToEdit = {
         name: body.name,
         descripcion: body.descripcion
     }
 
-    Room.findByIdAndUpdate(id, roomToEdit, {
+    Sala.findByIdAndUpdate(id, salaToEdit, {
         new: true,
         runValidators: true
-    }, (err, roomDB) => {
+    }, (err, salaDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         }
-        if (!roomDB) {
+        if (!salaDB) {
             return res.status(400).json({
                 ok: false,
-                roomDB
+                salaDB
             })
         }
         res.status(200).json({
             ok: true,
-            roomDB
+            salaDB
         })
 
     })
 })
 
-app.delete('/room/:id', (req, res) => {
+app.delete('/sala/:id', (req, res) => {
     let id = req.params.id
-    let roomState = {
+    let salaState = {
         state: false
     }
 
-    Room.findByIdAndUpdate(id, roomState, {
+    Sala.findByIdAndUpdate(id, salaState, {
         new: true,
         runValidators: true
-    }, (err, roomDB) => {
+    }, (err, salaDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             })
         }
-        if (!roomDB) {
+        if (!salaDB) {
             ok: false,
-            roomDB
+            salaDB
         }
 
         res.status(200).json({
             ok: true,
-            roomDB
+            salaDB
         })
     })
 

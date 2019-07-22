@@ -13,9 +13,9 @@ let PermissionSchema = new Schema({
         ref: 'User',
         required: [true, 'Its required']
     },
-    room: {
+    sala: {
         type: Schema.Types.ObjectId,
-        ref: 'Room',
+        ref: 'Sala',
         required: [true, 'Its required']
     },
     typeAccess: {

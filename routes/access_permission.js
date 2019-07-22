@@ -3,7 +3,7 @@ const app = express();
 AccessPermission = require('../models/access_permission');
 const date = require('date-and-time');
 let dateFormat = require('dateformat');
-const Room = require('../models/room');
+const Sala = require('../models/sala');
 const mongoose = require('mongoose')
 let now = new Date();
 
@@ -39,14 +39,14 @@ app.post('/permission', (req, res) => {
         date: dateFormat(now, "dddd, d  'de' mmmm, yyyy "),
         hour: date.format(now, "hh:mm:ss A"),
         user: body.user,
-        room: body.room,
+        sala: body.sala,
         typeAccess: "ENTRY"
     });
     let permission_save_exit = new AccessPermission({
         date: dateFormat(now, "dddd, d  'de' mmmm, yyyy "),
         hour: date.format(now, "hh:mm:ss A"),
         user: body.user,
-        room: body.room,
+        sala: body.sala,
         typeAccess: "EXIT"
     })
 

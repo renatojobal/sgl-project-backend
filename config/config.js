@@ -18,4 +18,4 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.SEED = process.env.SEED || "seed-secreto";
 // CADUCIDAD
 
-process.env.CADUCIDAD = process.env.CADUCIDAD || '15d'
+process.env.CADUCIDAD = process.env.CADUCIDAD || '15d';
