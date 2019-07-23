@@ -75,9 +75,9 @@ app.post("/sala", (req, res) => {
 
 app.put('/sala/:id', (req, res) => {
     let id = req.params.id
-
     let body = req.body;
-
+    console.log('Metodo put');
+    console.log(id);
     let salaToEdit = {
         name: body.name,
         descripcion: body.descripcion

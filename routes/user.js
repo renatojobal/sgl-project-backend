@@ -4,11 +4,11 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const verify_token = require('../middleware/auth');
 
-app.get("/user", [verify_token], (req, res) => {
+app.get("/usuario", [verify_token], (req, res) => {
     User.find({
             state: true
         },
-        (err, userDB) => {
+        (err, usuarios) => {
             if (err) {
                 return res.status.json({
                     ok: true,
@@ -17,13 +17,13 @@ app.get("/user", [verify_token], (req, res) => {
             }
             res.status(200).json({
                 ok: true,
-                userDB
+                usuarios
             });
         }
     ).populate("Rol");
 });
 
-app.post("/user", (req, res) => {
+app.post("/usuario", (req, res) => {
     let body = req.body;
     let userToSave = new User({
         firstName: body.firstName,
@@ -36,14 +36,14 @@ app.post("/user", (req, res) => {
         rol: body.rol
     });
 
-    userToSave.save((err, userDB) => {
+    userToSave.save((err, usuarios) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 error: err
             });
         }
-        if (!userDB) {
+        if (!usuarios) {
             return res.status(400).json({
                 ok: false,
                 error: err
@@ -51,12 +51,12 @@ app.post("/user", (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            data: userDB
+            data: usuarios
         });
     });
 });
 
-app.put("/user/:id", verify_token, (req, res) => {
+app.put("/usuario/:id", verify_token, (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
@@ -78,28 +78,28 @@ app.put("/user/:id", verify_token, (req, res) => {
             new: true,
             runValidators: true
         },
-        (err, userDB) => {
+        (err, usuarios) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
                     err
                 });
             }
-            if (!userDB) {
+            if (!usuarios) {
                 return res.status(400).json({
                     ok: false,
-                    userDB
+                    usuarios
                 });
             }
             res.status(200).json({
                 ok: true,
-                userDB
+                usuarios
             });
         }
     );
 });
 
-app.delete("/user/:id", verify_token, (req, res) => {
+app.delete("/usuario/:id", verify_token, (req, res) => {
     let id = req.params.id;
     let usarioState = {
         state: false
@@ -111,21 +111,21 @@ app.delete("/user/:id", verify_token, (req, res) => {
             new: true,
             runValidators: true
         },
-        (err, userDB) => {
+        (err, usuarios) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
                     err
                 });
             }
-            if (!userDB) {
+            if (!usuarios) {
                 ok: false,
-                userDB;
+                usuarios;
             }
 
             res.status(200).json({
                 ok: true,
-                userDB
+                usuarios
             });
         }
     );

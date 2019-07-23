@@ -50,7 +50,6 @@ app.post('/rol', (req, res) => {
 app.put('/rol/:id', (req, res) => {
     let id = req.params.id
     let body = req.body;
-
     let rolToEdit = {
         name: body.name
     }
