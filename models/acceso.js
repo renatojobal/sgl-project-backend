@@ -5,7 +5,7 @@ let typeAccess = {
     message: '{VALUE} is invalid!'
 }
 
-let PermissionSchema = new Schema({
+let AccesoSchema = new Schema({
     date: String,
     hour: String,
     user: {
@@ -25,4 +25,4 @@ let PermissionSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('AccessPermission', PermissionSchema);
+module.exports = mongoose.model('Acceso', AccesoSchema);

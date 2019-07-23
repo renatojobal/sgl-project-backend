@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-AccessPermission = require('../models/acceso');
+Acceso = require('../models/acceso');
 const date = require('date-and-time');
 let dateFormat = require('dateformat');
 const Sala = require('../models/sala');
@@ -8,16 +8,16 @@ const mongoose = require('mongoose')
 let now = new Date();
 
 app.get('/acceso', (req, res) => {
-    AccessPermission.find({
+    Acceso.find({
         state: true
-    }).exec((err, permissions) => {
+    }).exec((err, accesos) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             })
         }
-        if (!permissions) {
+        if (!accesos) {
             return res.status(400).json({
                 ok: false,
                 err
@@ -26,7 +26,7 @@ app.get('/acceso', (req, res) => {
 
         res.status(200).json({
             ok: true,
-            permissions
+            accesos
         });
     });
 });
@@ -35,22 +35,22 @@ app.get('/acceso', (req, res) => {
 app.post('/acceso', (req, res) => {
     body = req.body
 
-    let permission_save_entry = new AccessPermission({
+    let acceso_save_entry = new Acceso({
         date: dateFormat(now, "dddd, d  'de' mmmm, yyyy "),
         hour: date.format(now, "hh:mm:ss A"),
         user: body.user,
         sala: body.sala,
-        typeAccess: "ENTRY"
+        type: "ENTRY"
     });
-    let permission_save_exit = new AccessPermission({
+    let acceso_save_exit = new Acceso({
         date: dateFormat(now, "dddd, d  'de' mmmm, yyyy "),
         hour: date.format(now, "hh:mm:ss A"),
         user: body.user,
         sala: body.sala,
-        typeAccess: "EXIT"
+        type: "EXIT"
     })
 
-    AccessPermission.findOne(({
+    Acceso.findOne(({
         user: body.user
     }), (err, result) => {
         if (err) {
@@ -60,24 +60,24 @@ app.post('/acceso', (req, res) => {
             });
         }
         if (result === null) {
-            permission_save_entry.save();
+            acceso_save_entry.save();
             return res.status(200).json({
                 ok: true,
-                access: permission_save_entry
+                acceso: acceso_save_entry
             })
         } else {
-            if (result.typeAccess === 'EXIT') {
-                permission_save_entry.save();
+            if (result.type === 'EXIT') {
+                acceso_save_entry.save();
                 return res.status(200).json({
                     ok: true,
-                    access: permission_save_entry
+                    acceso: acceso_save_entry
                 })
             } else {
-                if (result.typeAccess === "ENTRY") {
-                    permission_save_exit.save();
+                if (result.type === "ENTRY") {
+                    acceso_save_exit.save();
                     return res.status(200).json({
                         ok: true,
-                        access: permission_save_exit
+                        acceso: acceso_save_exit
                     });
                 }
             }
