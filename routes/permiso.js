@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const Permiso = require('../models/permiso');
-
+// FIXME Agregar verificacion por token
 
 app.get('/permiso', (req, res) => {
     Permiso.find({
         state: true
     }, (err, permisos) => {
-        if (err) {
+        if (err) {  
             return res.status.json({
                 ok: true,
                 err

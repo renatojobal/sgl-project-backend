@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const Sala = require('../models/sala');
-
+// FIXME Agregar verificacion por token
 
 app.get('/sala', (req, res) => {
     Sala.find({

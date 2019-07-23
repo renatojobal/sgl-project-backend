@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const Rol = require('../models/rol');
+// FIXME Agregar verificacion por token
+
 
 app.get('/rol', (req, res) => {
     Rol.find({
