@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-AccessPermission = require('../models/access_permission');
+AccessPermission = require('../models/acceso');
 const date = require('date-and-time');
 let dateFormat = require('dateformat');
 const Sala = require('../models/sala');
 const mongoose = require('mongoose')
 let now = new Date();
 
-app.get('/permission', (req, res) => {
+app.get('/acceso', (req, res) => {
     AccessPermission.find({
         state: true
     }).exec((err, permissions) => {
@@ -32,7 +32,7 @@ app.get('/permission', (req, res) => {
 });
 
 
-app.post('/permission', (req, res) => {
+app.post('/acceso', (req, res) => {
     body = req.body
 
     let permission_save_entry = new AccessPermission({
