@@ -5,7 +5,7 @@ const Rol = require('../models/rol');
 app.get('/rol', (req, res) => {
     Rol.find({
         state: true
-    }).exec((err, rolDB) => {
+    }).exec((err, roles) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -14,7 +14,7 @@ app.get('/rol', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            rolDB
+            roles
         })
     });
 });
