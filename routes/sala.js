@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const Sala = require('../models/sala');
-// FIXME Agregar verificacion por token
+const verify_token = require('../middleware/auth');
 
-app.get('/sala', (req, res) => {
+app.get('/sala', verify_token, (req, res) => {
     Sala.find({
         state: true
     }, (err, salas) => {
@@ -21,7 +21,7 @@ app.get('/sala', (req, res) => {
 });
 
 
-app.get('/sala/:id', (req, res) => {
+app.get('/sala/:id', verify_token, (req, res) => {
     id = req.params.id;
     Sala.findById(id, (err, salaDB) => {
         if (err) {
@@ -44,7 +44,7 @@ app.get('/sala/:id', (req, res) => {
 
 });
 
-app.post("/sala", (req, res) => {
+app.post("/sala", verify_token, (req, res) => {
     let body = req.body;
     let salaToSave = new Sala({
         name: body.name,
@@ -73,7 +73,7 @@ app.post("/sala", (req, res) => {
 });
 
 
-app.put('/sala/:id', (req, res) => {
+app.put('/sala/:id', verify_token, (req, res) => {
     let id = req.params.id
     let body = req.body;
     console.log('Metodo put');
@@ -107,7 +107,7 @@ app.put('/sala/:id', (req, res) => {
     })
 })
 
-app.delete('/sala/:id', (req, res) => {
+app.delete('/sala/:id',  verify_token, (req, res) => {
     let id = req.params.id
     let salaState = {
         state: false

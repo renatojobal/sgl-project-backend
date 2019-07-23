@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 const Rol = require('../models/rol');
-// FIXME Agregar verificacion por token
+const verify_token = require('../middleware/auth');
 
 
-app.get('/rol', (req, res) => {
+app.get('/rol', verify_token, (req, res) => {
     Rol.find({
         state: true
     }).exec((err, roles) => {
@@ -21,7 +21,7 @@ app.get('/rol', (req, res) => {
     });
 });
 
-app.post('/rol', (req, res) => {
+app.post('/rol', verify_token, (req, res) => {
     let body = req.body
 
     let rolToSave = new Rol({
@@ -49,7 +49,7 @@ app.post('/rol', (req, res) => {
 })
 
 
-app.put('/rol/:id', (req, res) => {
+app.put('/rol/:id', verify_token, (req, res) => {
     let id = req.params.id
     let body = req.body;
     let rolToEdit = {
@@ -80,7 +80,7 @@ app.put('/rol/:id', (req, res) => {
     });
 });
 
-app.delete('/rol/:id', (req, res) => {
+app.delete('/rol/:id', verify_token, (req, res) => {
     let id = req.params.id
     let rolState = {
         state: false

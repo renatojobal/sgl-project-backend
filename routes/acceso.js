@@ -6,8 +6,9 @@ let dateFormat = require('dateformat');
 const Sala = require('../models/sala');
 const mongoose = require('mongoose')
 let now = new Date();
+const verify_token = require('../middleware/auth');
 
-app.get('/acceso', (req, res) => {
+app.get('/acceso', verify_token, (req, res) => {
     Acceso.find({
         state: true
     }).exec((err, accesos) => {
@@ -32,7 +33,7 @@ app.get('/acceso', (req, res) => {
 });
 
 
-app.post('/acceso', (req, res) => {
+app.post('/acceso', verify_token, (req, res) => {
     body = req.body
 
     let acceso_save_entry = new Acceso({

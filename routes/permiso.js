@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const Permiso = require('../models/permiso');
-// FIXME Agregar verificacion por token
+const verify_token = require('../middleware/auth');
 
-app.get('/permiso', (req, res) => {
+app.get('/permiso', verify_token, (req, res) => {
     Permiso.find({
         state: true
     }, (err, permisos) => {
@@ -21,7 +21,7 @@ app.get('/permiso', (req, res) => {
 });
 
 
-app.get('/permiso/:id', (req, res) => {
+app.get('/permiso/:id', verify_token, (req, res) => {
     id = req.params.id;
     Sala.findById(id, (err, permisos) => {
         if (err) {
@@ -44,7 +44,7 @@ app.get('/permiso/:id', (req, res) => {
 
 });
 
-app.post("/permiso", (req, res) => {
+app.post("/permiso", verify_token, (req, res) => {
     let body = req.body;
     let permisoToSave = new Permiso({
         day: body.day,
@@ -75,7 +75,7 @@ app.post("/permiso", (req, res) => {
 
 
 
-app.delete("/permiso/:id", (req, res) => {
+app.delete("/permiso/:id", verify_token, (req, res) => {
     let id = req.params.id;
     let permisoState = {
         state: false
